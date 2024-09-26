@@ -39,19 +39,6 @@ void createList(int num){
     head->prev = temp;
 }
 
-void reverseTraversal(){
-    struct node* ptr = createNode();
-    ptr=head->prev;
-    printf("%d\t",ptr->data);
-    ptr=ptr->prev;
-    while(ptr!=head){
-        printf("%d\t",ptr->data);
-        ptr=ptr->prev;
-    }
-    printf("%d\t",head->data);
-    printf("\n");
-}
-
 void traversal(){
     struct node* ptr = createNode();
     ptr=head;
@@ -93,17 +80,6 @@ void insertAtEnd(int data){
     temp->prev = ptr;
     head->prev = temp;
 }
-
-int  nodeLength(){
-    struct node* ptr = createNode();
-    int count = 0;
-    while(ptr->next!=head){
-        count++;
-        ptr = ptr->next;
-    }
-    return count;
-}
-
 
 void insertInBetween(int data, int n){
     if(n == 1){
@@ -185,21 +161,66 @@ void deleteInBetween(int n){
 
 int main(){
     head = createNode();
-    createList(3);
-    // traversal();
-    // // printf("cheak1\n");
-    // insertAtBeginning(1);
-    // // printf("cheak3\n");
-    // traversal();
-    // insertAtEnd(8);
-    // traversal();
-    // insertInBetween(6,1);
-    // traversal();
-    // deleteAtBeginning();
-    // traversal();
-    // deleteAtLast();
-    // traversal();
-    // deleteInBetween(3);
-    // traversal();
+    int s;
+    printf("Enter the list number\n");
+    scanf("%d",&s);
+    createList(s);
+    traversal();
+    int n;
+    printf("Enter the number of query\n");
+    scanf("%d",&n);
+    while(n>0){
+        int m;
+        printf("Enter for following operation\n 1.for insertionAtBeginning\n 2.for insertionAtlast\n 3.for insertionInBetween\n 4.for deleteAtBeginning\n 5.for deletionAtLast\n 6.for deletionInBetween\n");
+        scanf("%d",&m);
+        switch(m){
+            case 1:
+                int d1;
+                printf("Enter the data\n");
+                scanf("%d",&d1);
+                insertAtBeginning(d1);
+                traversal();
+                break;
+                
+            case 2:
+                int d2;
+                printf("Enter the data\n");
+                scanf("%d",&d2);
+                insertAtEnd(d2);
+                traversal();
+                break;
+            case 3:
+                int d3;
+                int d4;
+                printf("Enter the data\n");
+                scanf("%d",&d3);
+                printf("Enter position\n");
+                scanf("%d",&d4);
+                insertInBetween(d3,d4);
+                traversal();
+                break;
+            case 4:
+                deleteAtBeginning();
+                traversal();
+                break;
+            case 5:
+            
+                deleteAtLast();
+                traversal();
+                break;
+            case 6:
+                int d5;
+                printf("Enter position\n");
+                scanf("%d",&d5);
+                deleteInBetween(d5);
+                traversal();
+                break;    
+                
+            default:
+                printf("invalid input!!\n");
+                break;
+        }
+        n--;
+    }
     
 }
