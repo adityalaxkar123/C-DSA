@@ -105,15 +105,101 @@ int  nodeLength(){
 }
 
 
+void insertInBetween(int data, int n){
+    if(n == 1){
+        insertAtBeginning(data);
+        return;
+    }
+    struct node* ptr1 = createNode();
+    struct node* ptr2 = createNode();
+    ptr1 = head->next;
+    ptr2 = head;
+    int i = 0;
+    while(ptr1->next!=head){
+        i++;
+        if(i == n - 1){
+            break;
+        }
+        ptr1 = ptr1->next;
+        ptr2 = ptr2->next;
+    }
+    struct node* newNode = createNode();
+    newNode->data = data;
+    newNode->next = ptr1;
+    newNode->prev = ptr2;
+    ptr2->next = newNode;
+    ptr1->prev = newNode;
+    
+}
+
+void deleteAtBeginning(){
+    struct node* ptr1 = createNode();
+    ptr1=head->next;
+    while(ptr1->next!=head){
+        ptr1=ptr1->next;
+    }
+    struct node*ptr2 = createNode();
+    ptr2 = head;
+    head = head->next;
+    head->prev = ptr1;
+    ptr1->next = head;
+    free(ptr2);
+}
+
+void deleteAtLast(){
+    struct node* ptr1 = createNode();
+    struct node* ptr2 = createNode();
+    ptr1 = head->next;
+    ptr2 = head;
+    while(ptr1->next!=head){
+        ptr1 = ptr1->next;
+        ptr2 = ptr2->next;
+    }
+    ptr2->next =head;
+    head->prev = ptr2;
+    free(ptr1);
+}
+
+void deleteInBetween(int n){
+    if(n == 1){
+        deleteAtBeginning();
+        return;
+    }
+    struct node* ptr1 = createNode();
+    struct node* ptr2 = createNode();
+    ptr1 = head->next;
+    ptr2 = head;
+    int i = 0;
+    while(ptr1->next!=head){
+        i++;
+        if(i == n - 1){
+            break;
+        }
+        ptr1 = ptr1->next;
+        ptr2 = ptr2->next;
+    }
+    ptr2->next = ptr1->next;
+    ptr1->next->prev = ptr2;
+    free(ptr1);
+}
+
 int main(){
     head = createNode();
     createList(3);
-    traversal();
-    // printf("cheak1\n");
-    insertAtBeginning(1);
-    // printf("cheak3\n");
-    traversal();
-    insertAtEnd(8);
-    traversal();
+    // traversal();
+    // // printf("cheak1\n");
+    // insertAtBeginning(1);
+    // // printf("cheak3\n");
+    // traversal();
+    // insertAtEnd(8);
+    // traversal();
+    // insertInBetween(6,1);
+    // traversal();
+    // deleteAtBeginning();
+    // traversal();
+    // deleteAtLast();
+    // traversal();
+    // deleteInBetween(3);
+    // traversal();
     
 }
